@@ -1,0 +1,104 @@
+CREATE TABLE IF NOT EXISTS "Users" (
+	"user_id" UUID NOT NULL,
+	"first_name" VARCHAR(255) NOT NULL,
+	"last_name" VARCHAR(255) NOT NULL,
+	"email" VARCHAR(255) NOT NULL UNIQUE,
+	"password_hash" VARCHAR(255) NOT NULL,
+	"phone_number" VARCHAR(255) NOT NULL,
+	"role" TEXT NOT NULL,
+	"created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY("user_id")
+);
+
+
+
+
+CREATE TABLE IF NOT EXISTS "Property" (
+	"property_id" UUID NOT NULL,
+	"host_id" UUID NOT NULL,
+	"name" VARCHAR(255) NOT NULL,
+	"description" TEXT NOT NULL,
+	"loaction" VARCHAR(255) NOT NULL,
+	"pricepernight" DECIMAL NOT NULL,
+	"created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY("property_id")
+);
+
+
+
+
+CREATE TABLE IF NOT EXISTS "Booking" (
+	"booking_id" UUID NOT NULL,
+	"property_id" UUID NOT NULL,
+	"user_id" UUID NOT NULL,
+	"start_date" DATE NOT NULL,
+	"end_date" DATE NOT NULL,
+	"total_price" DECIMAL NOT NULL,
+	"status" TEXT NOT NULL,
+	"create_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY("booking_id")
+);
+
+
+
+
+CREATE TABLE IF NOT EXISTS "Payment" (
+	"Payment_id" UUID NOT NULL,
+	"booking_id" UUID NOT NULL,
+	"amount" DECIMAL NOT NULL,
+	"payment_date" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"payment_method" TEXT NOT NULL,
+	PRIMARY KEY("Payment_id")
+);
+
+
+
+
+CREATE TABLE IF NOT EXISTS "Review" (
+	"review_id" UUID NOT NULL,
+	"property_id" UUID NOT NULL,
+	"user_id" UUID NOT NULL,
+	"rating" INTEGER NOT NULL,
+	"created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY("review_id")
+);
+
+
+
+
+CREATE TABLE IF NOT EXISTS "Message" (
+	"message_id" UUID NOT NULL,
+	"sender_id" UUID NOT NULL,
+	"recipeint_id" UUID NOT NULL,
+	"message_body" TEXT NOT NULL,
+	"sent_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY("message_id")
+);
+
+
+
+ALTER TABLE "Property"
+ADD FOREIGN KEY("host_id") REFERENCES "Users"("user_id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "Booking"
+ADD FOREIGN KEY("property_id") REFERENCES "Property"("property_id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "Booking"
+ADD FOREIGN KEY("user_id") REFERENCES "Users"("user_id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "Payment"
+ADD FOREIGN KEY("booking_id") REFERENCES "Booking"("booking_id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "Review"
+ADD FOREIGN KEY("property_id") REFERENCES "Property"("property_id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "Review"
+ADD FOREIGN KEY("user_id") REFERENCES "Users"("user_id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "Message"
+ADD FOREIGN KEY("sender_id") REFERENCES "Users"("user_id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+ALTER TABLE "Message"
+ADD FOREIGN KEY("recipeint_id") REFERENCES "Users"("user_id")
+ON UPDATE NO ACTION ON DELETE NO ACTION;
