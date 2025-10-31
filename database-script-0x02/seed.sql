@@ -17,10 +17,10 @@ VALUES
 ('bbbb2222-bbbb-2222-bbbb-2222bbbb2222', '44444444-4444-4444-4444-444444444444', 'Kumasi Villa', 'Spacious villa with a private garden and pool.', 'Kumasi, Ghana', 450.00);
 
 -- Insert Bookings
-INSERT INTO "Booking" ("booking_id", "property_id", "user_id", "start_date", "end_date", "total_price", "status")
-VALUES
-('bkg11111-aaaa-bbbb-cccc-111111111111', 'aaaa1111-aaaa-1111-aaaa-1111aaaa1111', '22222222-2222-2222-2222-222222222222', '2025-10-01', '2025-10-05', 1200.00, 'confirmed'),
-('bkg22222-bbbb-cccc-dddd-222222222222', 'bbbb2222-bbbb-2222-bbbb-2222bbbb2222', '33333333-3333-3333-3333-333333333333', '2025-11-10', '2025-11-13', 1350.00, 'pending');
+    INSERT INTO "Booking" ("booking_id", "property_id", "user_id", "start_date", "end_date", "total_price", "status")
+    VALUES
+    ('bkg11111-aaaa-bbbb-cccc-111111111111', 'aaaa1111-aaaa-1111-aaaa-1111aaaa1111', '22222222-2222-2222-2222-222222222222', '2025-10-01', '2025-10-05', 1200.00, 'confirmed'),
+    ('bkg22222-bbbb-cccc-dddd-222222222222', 'bbbb2222-bbbb-2222-bbbb-2222bbbb2222', '33333333-3333-3333-3333-333333333333', '2025-11-10', '2025-11-13', 1350.00, 'pending');
 
 -- Insert Payments
 INSERT INTO "Payment" ("Payment_id", "booking_id", "amount", "payment_method")
